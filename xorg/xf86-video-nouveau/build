@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+patch -p1 < rootless-nouveau.patch
+
+export LDFLAGS="$LDFLAGS -Wl,-z,lazy"
+export CFLAGS="$CFLAGS -fcommon"
+
+./configure \
+    --prefix=/usr
+
+make
+make DESTDIR="$1" install
