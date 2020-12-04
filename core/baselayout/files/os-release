@@ -1,0 +1,6 @@
+NAME="NOIR Linux"
+PRETTY_NAME="NOIR Linux"
+ID=noir
+BUILD_ID=rolling
+SUPPORT_URL="https://github.com/noirlinux"
+BUG_REPORT_URL="https://github.com/noirlinux"
