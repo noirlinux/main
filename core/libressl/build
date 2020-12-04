@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc
+
+make
+make DESTDIR="$1" install
+
+install -Dm 755 update-certdata.sh "$1/etc/ssl"
