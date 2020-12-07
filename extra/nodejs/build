@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+# Fix python 3.
+sed -i 's|(3, 8)|(3, 9), (3, 8)|g' configure
+
+./configure \
+    --shared-zlib \
+    --with-intl=small-icu \
+    --without-etw \
+    --without-dtrace \
+    --without-report \
+    --without-node-snapshot \
+    --without-node-code-cache \
+    --partly-static \
+    --ninja
+
+ninja -C out/Release
+tools/install.py install "$1" /usr
+
+# Remove unneeded files.
+rm -rf "$1/usr/include/node/openssl"
+rm -rf "$1/usr/lib/node_modules/npm/scripts"
+rm -f  "$1/usr/lib/node_modules/npm/configure"
