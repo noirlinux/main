@@ -45,7 +45,7 @@ export libat_cv_have_ifunc=no
     --enable-shared \
     --enable-threads \
     --enable-tls \
-    --enable-languages=c,c++,fortran,objc,obj-c++,d \
+    --enable-languages=c,c++,fortran,d \
     --without-included-gettext \
     --with-system-zlib \
     --build=x86_64-pc-linux-musl \
