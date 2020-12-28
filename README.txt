@@ -40,3 +40,22 @@ ________________________________________________________________________________
 
 The NOIR main repositories will be kept as close to the KISS main repositories [for now]
 so as to allow users to swap between repositories whenever they see it fit.
+
+4. BINARIES
+NOTE: This assumes that the user trusts the source of the binary packages.
+
+Regularly updated binaries are provided for the following packages:
+* Firefox
+* Firefox ESR
+* LLVM
+* Rust
+
+Binaries for NOIR (musl) -> https://github.com/kiss-community/repo-bin
+
+### Installing binaries
+
+* Modify `KISS_PATH` such that the `bin` repository takes priority over other repositories:
+
+$ export KISS_PATH=/path/to/main/bin:$KISS_PATH
+
+* The packages can now be installed by a simple [kiss b $PKG && kiss i $PKG] command.
