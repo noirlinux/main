@@ -9,6 +9,7 @@
     --disable-nls \
     --enable-pie \
     --without-pam \
+    --without-sendmail \
     --with-ignore-dot \
     --with-insults=disabled \
     --with-logfac=auth \
