@@ -24,10 +24,6 @@ index c9517c55..f20eb593 100644
  static char *snd_plugin_dir = NULL;
  #endif
 -#endif
-<<<<<<< HEAD
  
-=======
-
->>>>>>> alsa-lib: new package at 1.2.4
  #if defined(DL_ORIGIN_AVAILABLE) && defined(HAVE_LIBPTHREAD)
  static pthread_mutex_t snd_dlpath_mutex = PTHREAD_MUTEX_INITIALIZER;
