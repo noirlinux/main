@@ -61,6 +61,8 @@ find "$1" -name libgij.a      -exec rm -f {} +
 
 # Some legacy programs will expect cc
 ln -s gcc "$1/usr/bin/cc"
+
+# Some programs will expect f95
 ln -s gfortran "$1/usr/bin/f95"
 
 # POSIX compliance.
