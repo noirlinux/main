@@ -2,7 +2,7 @@
 #
 # System wide environment and startup programs.
 
-# Set default path (/usr/sbin:/sbin:/bin included for non-NOIR Linux chroots).
+# Set default path (/usr/sbin:/sbin:/bin included for non-KISS Linux chroots).
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
 
 # Set default umask.
