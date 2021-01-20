@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-# Fix CVE-2020-28929. This will be fixed upstream in version 1.2.2.
-patch -p1 < wcsnrtombs_cve_2020_28928.patch
-
 # Uncomment if using valgrind or similar.
 # :>nostrip
 
@@ -21,6 +18,9 @@ ln -s  /usr/lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd"
 # Fix incorrect symlink to libc.so.
 ln -sf libc.so "$1/usr/lib/ld-musl-x86_64.so.1"
 
+# testing glibc compatibility
+ln -sf /usr/lib/ld-musl-x86_64.so.1 "$1/usr/lib/ld-linux-x86-64.so.2"
+
 # Install BSD compatibility headers.
 install -Dm 755 cdefs.h "$1/usr/include/sys/cdefs.h"
 install -Dm 755 queue.h "$1/usr/include/sys/queue.h"
@@ -29,6 +29,3 @@ install -Dm 755 tree.h  "$1/usr/include/sys/tree.h"
 # Install getconf.
 cc getconf.c -o "$1/usr/bin/getconf"
 cc getent.c  -o "$1/usr/bin/getent"
-
-# compatibility for glibc
-ln -sf /usr/lib/ld-musl-x86_64.so.1 "$1/usr/lib/ld-linux-x86-64.so.2"
