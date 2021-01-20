@@ -1,8 +1,6 @@
-NAME="KISS Linux"
-PRETTY_NAME="KISS Linux"
-ID=kiss
+NAME="NOIR Linux"
+PRETTY_NAME="NOIR Linux"
+ID=noir
 BUILD_ID=rolling
-HOME_URL="https://k1ss.org"
-DOCUMENTATION_URL="https://k1ss.org"
-SUPPORT_URL="https://github.com/kisslinux"
-BUG_REPORT_URL="https://github.com/kisslinux"
+SUPPORT_URL="https://github.com/noirlinux"
+BUG_REPORT_URL="https://github.com/noirlinux"
