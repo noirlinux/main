@@ -1,4 +1,4 @@
-https://github.com/eqrion/cbindgen/archive/v0.16.0.tar.gz
+https://github.com/eqrion/cbindgen/archive/v0.17.0.tar.gz
 
 # This is a pre-generated list of crate dependencies from the
 # "kiss-cargolock-urlgen" utility. This allows us to pre-cache
@@ -8,7 +8,7 @@ https://static.crates.io/crates/ansi_term/ansi_term-0.11.0.crate vendor
 https://static.crates.io/crates/atty/atty-0.2.14.crate vendor
 https://static.crates.io/crates/autocfg/autocfg-1.0.1.crate vendor
 https://static.crates.io/crates/bitflags/bitflags-1.2.1.crate vendor
-https://static.crates.io/crates/cbindgen/cbindgen-0.16.0.crate vendor
+https://static.crates.io/crates/cbindgen/cbindgen-0.17.0.crate vendor
 https://static.crates.io/crates/cfg-if/cfg-if-0.1.10.crate vendor
 https://static.crates.io/crates/clap/clap-2.33.3.crate vendor
 https://static.crates.io/crates/cloudabi/cloudabi-0.0.3.crate vendor
