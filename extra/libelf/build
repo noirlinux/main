@@ -3,8 +3,10 @@
 # Build sometimes forces -Werror.
 export CFLAGS="$CFLAGS -Wno-error"
 
-# Disable configure error for missing argp.
-sed -i 's/as_fn_error.*libargp/: "/g' configure
+# Disable configure error for missing argp, fts, and obstack.
+sed -i -e 's/as_fn_error.*argp/: "/g' \
+       -e 's/as_fn_error.*fts/: "/g' \
+       -e 's/as_fn_error.*obstack/: "/g' configure
 
 # Don't compile two unrelated C files which require argp.
 sed -i 's/color.*printversion../#/g' lib/Makefile.in
