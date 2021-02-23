@@ -14,7 +14,8 @@
     --without-icu \
     --without-libpsl \
     --with-pic \
-    --with-ca-fallback
+    --with-ca-fallback \
+    --enable-static
 
-make curl_LDFLAGS=-all-static
+make
 make DESTDIR="$1" install
