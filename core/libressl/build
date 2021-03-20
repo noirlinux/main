@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+patch -p1 < use-after-free-fix.patch
+
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc
