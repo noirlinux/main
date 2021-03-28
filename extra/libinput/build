@@ -16,7 +16,6 @@ meson \
     -Ddocumentation=false \
     -Dtests=false \
     -Dlibwacom=false \
-    -Dudev="${udev:=true}" \
     . output
 
 ninja -C output
