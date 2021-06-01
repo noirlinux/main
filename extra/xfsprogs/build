@@ -1,27 +1,24 @@
 #!/bin/sh -e
 
-(
-    cd inih
+# Bundle libinih just for xfsprogs
+export DESTDIR="$PWD/../libinih"
 
-    export DESTDIR="$PWD/../libinih"
+meson \
+    -Dprefix=/ \
+    -Ddefault_library=static \
+    -Ddistro_install=true \
+    -Dwith_INIReader=true \
+    -Dmulti-line_entries=true \
+    -Dutf-8_bom=true \
+    -Dinline_comments=true \
+    -Duse_heap=false \
+    inih inih/output
 
-    meson \
-        -Dprefix=/ \
-        -Ddefault_library=static \
-        -Ddistro_install=true \
-        -Dwith_INIReader=true \
-        -Dmulti-line_entries=true \
-        -Dutf-8_bom=true \
-        -Dinline_comments=true \
-        -Duse_heap=false \
-        . output
+ninja -C inih/output
+ninja -C inih/output install
 
-    ninja -C output
-    ninja -C output install
-)
-
-export CFLAGS="$CFLAGS -I$PWD/libinih/include"
-export LDFLAGS="$LDFLAGS -L$PWD/libinih/lib"
+export CFLAGS="$CFLAGS -I$PWD/../libinih/include"
+export LDFLAGS="$LDFLAGS -L$PWD/../libinih/lib"
 
 # Remove incorrect bash dependency.
 sed -i 's/bash/sh/' install-sh
@@ -39,4 +36,4 @@ make \
     DIST_ROOT="$1" \
     PKG_ROOT_SBIN_DIR=/usr/bin \
     PKG_ROOT_LIB_DIR=/usr/lib \
-    install
+    install install-dev
