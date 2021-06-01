@@ -5,12 +5,14 @@ export DESTDIR="$1"
 sed -i "/subdir('tests')/d"    meson.build
 sed -i "/subdir('examples')/d" meson.build
 
+# Don't clone subprojects we don't even enable
+rm -rf subprojects
+
 meson \
     --prefix=/usr \
-    -Dgir=false \
     -Dgtk_doc=false \
+    -Dinstall-tests=false \
     -Dintrospection=disabled \
-    -Dinstalled_tests=false \
     . build
 
 ninja -C build
