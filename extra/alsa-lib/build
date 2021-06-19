@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-patch -p1 < fix-dlo.patch
+# Fix a missing include
+sed -i '/<dirent.h>/a #include <limits.h>' src/ucm/ucm_exec.c
 
 ./configure \
     --without-debug \
