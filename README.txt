@@ -9,8 +9,8 @@ The official repositories for NOIR Linux maintained by Daniel M. Matongo.
 
 More information:
 
-    - https://k1ss.org
-    - https://k1ss.org/package-system
+    - https://kisslinux.xyz/
+    - https://kisslinux.xyz/package-system
     - https://repology.org/repository/kiss_main
 
 
@@ -34,12 +34,12 @@ as possible.
  - Taking notes from Wyverkiss we want to be as GNU free as we
 can and if we can't at least make GNU software optional.
 
+ - We also strive for stability in as much as we love functional minimalism.
 
 3. NOIR & KISS
 ________________________________________________________________________________
 
-The NOIR main repositories will be kept as close to the KISS main repositories [for now]
-so as to allow users to swap between repositories whenever they see it fit.
+The NOIR main repositories and KISS repo are no longer compatible, they cannot be used together, it is ill advised to attempt to do so.
 
 4. BINARIES
 NOTE: This assumes that the user trusts the source of the binary packages.
