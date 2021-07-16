@@ -2,7 +2,7 @@
 
 GRUB_DEFAULT=0
 GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="KISS"
+GRUB_DISTRIBUTOR="NOIR"
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
 
 # Preload both GPT and MBR modules so that they are not missed
