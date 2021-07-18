@@ -1,22 +1,28 @@
 #!/bin/sh -e
 
-for patch in *.patch; do
+for patch in patch/*.patch; do
     patch -p1 < "$patch"
 done
 
 # Remove forced gcc/g++ usage so builds work on gcc-less systems.
-sed -i "s#= g[c+][c+]#= ${CC:=cc}#g" Makefile
-sed -i "s#\(\$(CROSS_COMPILE)\)gcc#\1${CC}#g" Makefile
+sed -e "s#= g[c+][c+]#= $CC#g" \
+    -e "s#\(\$(CROSS_COMPILE)\)gcc#\1$CC#g" Makefile > _
+mv -f _ Makefile
 
-# Ensure that busybox's build system is aware that 'cc' may point
-# to clang rather than GCC. This is the case in non-GCC systems.
-case $("$CC" --version) in (*clang*)
-    sed -i "s&\(\$(CC),\)clang&\1${CC}&g" Makefile.flags
+case $("$CC" --version) in *clang*)
+    # Disable UB based optimizations which are optimized out by
+    # clang and become null pointer dereferences(?).
+    patch -p1 < patch-clang/fix-UB.patch
+
+    # Ensure that busybox's build system is aware that 'cc' may point
+    # to clang rather than GCC. This is the case in non-GCC systems.
+    sed "s&\(\$(CC),\)clang&\1$CC&g" Makefile.flags > _
+    mv -f _ Makefile.flags
 esac
 
 # Build and install regular busybox.
 # This excludes utilities which require 'suid' to function.
-make CC="$CC" HOSTCC="$CC"
+make HOSTCC="$CC"
 make CONFIG_PREFIX="$1/usr" install
 
 # Rename the binary temporarily.
@@ -25,7 +31,7 @@ mv "$1/usr/bin/busybox" "$1/usr/bin/busybox-nosuid"
 # Build and install suid busybox.
 # This _only_ includes utlities which require 'suid' to function.
 cp -f .config-suid .config
-make CC="$CC" HOSTCC="$CC"
+make HOSTCC="$CC"
 make CONFIG_PREFIX="$1/usr" install
 
 # Aptly name the busybox binaries.
@@ -50,15 +56,10 @@ chmod u+s "$1/usr/bin/busybox-suid"
 mkdir -p "$1/etc/acpid"
 
 # Install runit services.
-install -Dm755 acpid.run           "$1/etc/sv/acpid/run"
-install -Dm755 crond.run           "$1/etc/sv/crond/run"
-install -Dm755 syslogd.run         "$1/etc/sv/syslogd/run"
-install -Dm755 mdev.run            "$1/etc/sv/mdev/run"
-install -Dm755 ntpd.run            "$1/etc/sv/ntpd/run"
-ln -s /run/runit/supervise.acpid   "$1/etc/sv/acpid/supervise"
-ln -s /run/runit/supervise.crond   "$1/etc/sv/crond/supervise"
-ln -s /run/runit/supervise.syslogd "$1/etc/sv/syslogd/supervise"
-ln -s /run/runit/supervise.mdev    "$1/etc/sv/mdev/supervise"
-ln -s /run/runit/supervise.ntpd    "$1/etc/sv/ntpd/supervise"
+for s in acpid crond syslogd mdev ntpd; do
+    mkdir -p "$1/etc/sv/$s"
+    cp -f "$s.run" "$1/etc/sv/$s/run"
+    ln -sf "/run/runit/supervise.$s" "$1/etc/sv/$s/supervise"
+done
 
-install -Dm644 mdev.conf "$1/etc/mdev.conf"
+cp -f mdev.conf "$1/etc/mdev.conf"
