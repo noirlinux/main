@@ -10,7 +10,7 @@
 #   --enable-debug
 
 make
-make DESTDIR="$1" install
+make install
 
 mkdir -p "$1/usr/bin"
 ln -s  /usr/lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd"
@@ -18,13 +18,9 @@ ln -s  /usr/lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd"
 # Fix incorrect symlink to libc.so.
 ln -sf libc.so "$1/usr/lib/ld-musl-x86_64.so.1"
 
-# testing glibc compatibility
-ln -sf /usr/lib/ld-musl-x86_64.so.1 "$1/usr/lib/ld-linux-x86-64.so.2"
-
 # Install BSD compatibility headers.
-install -Dm 755 cdefs.h "$1/usr/include/sys/cdefs.h"
-install -Dm 755 queue.h "$1/usr/include/sys/queue.h"
-install -Dm 755 tree.h  "$1/usr/include/sys/tree.h"
+cp -f cdefs.h queue.h tree.h \
+    "$1/usr/include/sys"
 
 # Install getconf.
 cc getconf.c -o "$1/usr/bin/getconf"
