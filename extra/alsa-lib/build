@@ -1,11 +1,8 @@
 #!/bin/sh -e
 
-# Fix a missing include
-sed -i '/<dirent.h>/a #include <limits.h>' src/ucm/ucm_exec.c
-
 ./configure \
     --without-debug \
     --prefix=/usr
 
 make
-make DESTDIR="$1" install
+make install
