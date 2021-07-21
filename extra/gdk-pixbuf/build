@@ -1,8 +1,7 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
-
-sed -i "/subdir('tests')/d" meson.build
+sed "/subdir('tests')/d" meson.build > _
+mv -f _ meson.build
 
 meson \
     --prefix=/usr \
@@ -10,7 +9,9 @@ meson \
     --mandir=/usr/share/man \
     -Dgir=false \
     -Djasper=false \
+    -Djpeg=true \
     -Dpng=true \
+    -Dtiff=true \
     -Ddocs=false \
     -Dman=false \
     -Dgio_sniffing=false \
