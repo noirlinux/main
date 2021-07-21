@@ -8,8 +8,9 @@
     --libexecdir=/usr/lib/dhcpcd
 
 make
-make DESTDIR="$1" install
+make install
 
 # Install runit service.
-install -Dm 755 dhcpcd.run        "$1/etc/sv/dhcpcd/run"
-ln -s /run/runit/supervise.dhcpcd "$1/etc/sv/dhcpcd/supervise"
+mkdir -p "$1/etc/sv/dhcpcd"
+cp -f dhcpcd.run "$1/etc/sv/dhcpcd/run"
+ln -sf /run/runit/supervise.dhcpcd "$1/etc/sv/dhcpcd/supervise"
