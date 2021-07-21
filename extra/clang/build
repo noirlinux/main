@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
-
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
@@ -25,5 +23,7 @@ cmake --install build
 
     rmdir "$1/usr/libexec"
 
-    sed -i 's|libexec|lib/clang|' "$1/usr/bin/scan-build"
+    sed 's|libexec|lib/clang|' "$1/usr/bin/scan-build" > _
+    mv -f _ "$1/usr/bin/scan-build"
+    chmod +x "$1/usr/bin/scan-build"
 }
