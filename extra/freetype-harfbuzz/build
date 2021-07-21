@@ -10,7 +10,7 @@ build_freetype() (
         --with-harfbuzz="$2"
 
     make
-    make DESTDIR="$1" install
+    make install
 )
 
 build_harfbuzz() (
@@ -21,7 +21,6 @@ build_harfbuzz() (
 
     cd harfbuzz
 
-    export DESTDIR="$1"
     meson \
         --prefix=/usr \
         -Dpkg_config_path="$1/usr/lib/pkgconfig" \
