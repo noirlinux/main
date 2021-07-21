@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
 ./configure \
-    AUTOMAKE=/bin/true \
     --prefix=/usr \
     --localstatedir=/var \
     --sysconfdir=/etc \
@@ -11,4 +10,4 @@
     --disable-nls
 
 make
-make DESTDIR="$1" install
+make install
