@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-./configure \
-    --prefix=/usr \
-    --disable-gtk
-
-make
-make DESTDIR="$1" install
