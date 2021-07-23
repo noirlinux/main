@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-meson \
-    --prefix=/usr \
-    . build
-
-ninja -C build
-ninja -C build install
