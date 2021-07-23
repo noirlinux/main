@@ -1,12 +1,14 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
-
 meson \
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
     -Dhas-dlvsym=false \
+    -Degl=yes \
+    -Dtests=false \
+    -Dglx=no \
+    -Dx11=false \
     . output
 
 ninja -C output
