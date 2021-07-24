@@ -10,4 +10,4 @@ meson   make
 pango
 pkgconf make
 python  make
-wayland
+
