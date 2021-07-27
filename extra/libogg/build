@@ -3,5 +3,8 @@
 ./configure \
     --prefix=/usr
 
-make
-make DESTDIR="$1" install
+make -C src
+make -C include install
+make -C src     install
+
+make install-m4dataDATA install-pkgconfigDATA
