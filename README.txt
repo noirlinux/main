@@ -9,9 +9,8 @@ The official repositories for NOIR Linux maintained by Daniel M. Matongo.
 
 More information:
 
-    - https://kisslinux.xyz/
     - https://kisslinux.xyz/package-system
-    - https://repology.org/repository/kiss_main
+    - https://repology.org/repository/noir_main (pending)
 
 
 1. Why NOIR?
