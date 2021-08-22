@@ -4,4 +4,9 @@
     --prefix=/usr
 
 make
-make DESTDIR="$1" install
+
+make -C lib     install
+make -C include install
+
+make install-m4dataDATA install-pkgconfigDATA
+
