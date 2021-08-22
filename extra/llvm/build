@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
-
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
@@ -14,6 +12,7 @@ cmake -B build \
     -DLLVM_INCLUDE_EXAMPLES=OFF \
     -DLLVM_INCLUDE_DOCS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
+    -DLLVM_ENABLE_TERMINFO=OFF \
     -DLLVM_ENABLE_LIBXML2=OFF \
     -Wno-dev
 
