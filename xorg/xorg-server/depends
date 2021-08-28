@@ -11,7 +11,6 @@ libdrm
 libepoxy
 libfontenc
 libpciaccess
-libressl
 libxcb
 libxkbfile
 libxshmfence
@@ -19,6 +18,7 @@ linux-headers make
 mesa
 pixman
 pkgconf make
+openssl
 xkeyboard-config
 xtrans make
 zlib
