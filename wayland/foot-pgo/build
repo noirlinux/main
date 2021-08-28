@@ -5,17 +5,13 @@
     exit 1
 }
 
-# Avoid scdoc dependency.
-sed "/subdir('doc')/d" meson.build > _
-mv -f _ meson.build
-
 case $("$CC" --version) in
     *clang*)
         # Clang requires this for PGO.
         export CFLAGS="$CFLAGS -Wno-ignored-optimization-argument"
     ;;
 
-    *gcc*)
+    *GCC*)
         # PGO with < -O3 is slow > GCC 10.1.X.
         export CFLAGS="$CFLAGS -O3"
     ;;
@@ -28,7 +24,7 @@ meson \
     --prefix=/usr \
     --buildtype=release \
     --force-fallback-for=fcft,tllist \
-    -Db_lto=true \
+    -Dime=false \
     ../..
 
 # Generate PGO data.
