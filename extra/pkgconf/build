@@ -5,6 +5,9 @@
     --sysconfdir=/etc
 
 make
-make DESTDIR="$1" install
+make install
 
 ln -s pkgconf "$1/usr/bin/pkg-config"
+
+# Remove documentation (README, etc).
+rm -rf "$1/usr/share/doc"
