@@ -1,18 +1,22 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
+patch -p1 < no-fribidi.patch
 
-sed -i "/subdir('tests')/d"    meson.build
-sed -i "/subdir('examples')/d" meson.build
-
-# Don't clone subprojects we don't even enable
+# Disable download of missing (optional) dependencies
+# during the build. This cannot be turned off otherwise.
 rm -rf subprojects
+
+: > tests/meson.build
+: > examples/meson.build
+: > docs/meson.build
 
 meson \
     --prefix=/usr \
+    -Dgir=false \
     -Dgtk_doc=false \
-    -Dinstall-tests=false \
+    -Dxft=disabled \
     -Dintrospection=disabled \
+    -Dinstall_tests=false \
     . build
 
 ninja -C build
