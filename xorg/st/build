@@ -1,9 +1,10 @@
 #!/bin/sh -e
 
-sed -i 's|Liberation Mono|Monospace|g' config.def.h
+sed 's|Liberation Mono|Monospace|g' config.def.h > _
+mv -f _ config.def.h
 
 # Install terminfo to right location.
-export TERMINFO=$1/usr/share/terminfo
+export TERMINFO="$1/usr/share/terminfo"
 mkdir -p "$TERMINFO"
 
 make
