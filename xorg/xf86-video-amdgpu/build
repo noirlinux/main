@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-patch -p1 < rootless_modesetting.patch
+patch -p1 < rootless_amdgpu.patch
 
 export LDFLAGS="$LDFLAGS -Wl,-z,lazy"
 export CFLAGS="$CFLAGS -fcommon"
