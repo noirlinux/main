@@ -1,2 +1,2 @@
-https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tar.xz
+https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tar.xz
 patches/python3-always-pip.patch
