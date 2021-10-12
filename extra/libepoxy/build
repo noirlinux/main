@@ -4,11 +4,7 @@ meson \
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
-    -Dhas-dlvsym=false \
-    -Degl=yes \
-    -Dtests=false \
-    -Dglx=no \
-    -Dx11=false \
+    -Dx11=true \
     . output
 
 ninja -C output
