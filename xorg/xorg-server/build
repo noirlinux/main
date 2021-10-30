@@ -1,13 +1,29 @@
 #!/bin/sh -e
 
+export xcvt=$PWD/tmp
+
+(
+    export DESTDIR=$xcvt
+    cd xcvt
+
+    meson \
+        . output
+
+    ninja -C output
+    ninja -C output install
+)
+
 patch -p1 < rootless_modesetting.patch
-patch -p1 < fix-crash.patch
+
+export LIBXCVT_CFLAGS="-I$xcvt/usr/include"
+export LIBXCVT_LIBS="-L$xcvt/usr/lib -lxcvt"
+export PKG_CONFIG_PATH="$xcvt/usr/lib/pkgconfig"
 
 ./configure \
     --prefix=/usr \
     --localstatedir=/var \
+    --disable-shared \
     --disable-systemd-logind \
-    --disable-xwayland \
     --disable-unit-tests \
     --enable-glx \
     --enable-dri \
@@ -15,8 +31,9 @@ patch -p1 < fix-crash.patch
     --enable-dri3 \
     --enable-glamor \
     --enable-xorg \
-    --with-sha1=libcrypto \
     --with-systemd-daemon=off
 
 make
 make DESTDIR="$1" install
+
+rm -f "$1/usr/share/X11/xorg.conf.d/10-evdev.conf"
