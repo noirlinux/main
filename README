@@ -1,7 +1,6 @@
 ### NOIR
 ________________________________________________________________________________
 
-
 #### Official Repositories
 ________________________________________________________________________________
 
@@ -55,6 +54,6 @@ Binaries for NOIR (musl) -> https://github.com/kiss-community/repo-bin
 
 * Modify `KISS_PATH` such that the `bin` repository takes priority over other repositories:
 
-$ export KISS_PATH=/path/to/main/bin:$KISS_PATH
+`$ export KISS_PATH=/path/to/main/bin:$KISS_PATH`
 
 * The packages can now be installed by a simple [kiss b $PKG && kiss i $PKG] command.
