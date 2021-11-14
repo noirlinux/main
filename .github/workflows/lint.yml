@@ -8,4 +8,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: jedahan/github-actions-kiss-lint@v13
         with:
-          kisspath: community
+          kisspath: main
