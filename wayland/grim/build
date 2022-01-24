@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-meson \
-    --prefix=/usr \
-    -Djpeg=disabled \
-    . build
-
-ninja -C build
-ninja -C build install

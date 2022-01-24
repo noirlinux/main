@@ -1,5 +1,0 @@
-cairo
-libxkbcommon
-meson make
-wayland
-wayland-protocols make
