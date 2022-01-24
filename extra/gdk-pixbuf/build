@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+: > tests/meson.build
+
+meson \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    -Ddebug=false \
+    -Djpeg=true \
+    -Dpng=true \
+    -Dtiff=false \
+    -Ddocs=false \
+    -Dman=false \
+    -Dgio_sniffing=false \
+    -Dinstalled_tests=false \
+    -Dbuiltin_loaders=all \
+    . output
+
+ninja -C output
+ninja -C output install
