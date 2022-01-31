@@ -1,2 +1,2 @@
-https://cmake.org/files/v3.22/cmake-3.22.1.tar.gz
+https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz
 patches/cmake-no-execinfo.patch
