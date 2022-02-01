@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-export CFLAGS="$CFLAGS -static"
+export LDFLAGS="$LDFLAGS -static"
 
 cat > config.mak <<EOF
 NO_GETTEXT=YesPlease
@@ -18,11 +18,11 @@ EOF
 ./configure \
     --prefix=/usr \
     --libexecdir=/usr/lib \
-    ac_cv_lib_curl_curl_global_init=yes \
+    --with-curl \
     ac_cv_snprintf_returns_bogus=no \
     ac_cv_fread_reads_directories=yes
 
-make LIBS="$(curl-config --static-libs) libgit.a xdiff/lib.a -lz"
+make 
 make install
 
 cp -Rf man "$1/usr/share/man"
