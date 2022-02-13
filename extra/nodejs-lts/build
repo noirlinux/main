@@ -2,4 +2,4 @@
 
 cd local
 
-cp -r * "$1"
+cp -r ./* "$1"
