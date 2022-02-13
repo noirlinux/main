@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+cd local
+
+cp -r * "$1"
