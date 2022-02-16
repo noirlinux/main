@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < fix-fd-issue.patch
-
 # Latest binutils tarball has falsely generated (empty) manual pages.
 # Generating them requires perl. Temporary fix until next release.
 ! kiss l perl || {

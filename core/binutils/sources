@@ -1,3 +1,2 @@
 https://ftp.gnu.org/gnu/binutils/binutils-2.38.tar.xz
-patches/fix-fd-issue.patch
 patches/fix-empty-man.patch
