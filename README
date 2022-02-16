@@ -41,6 +41,7 @@ ________________________________________________________________________________
 The NOIR main repositories and KISS repo are no longer compatible, they cannot be used together, it is ill advised to attempt to do so.
 
 4. BINARIES
+_______________________________________________________________________________
 NOTE: This assumes that the user trusts the source of the binary packages.
 
 Regularly updated binaries are provided for the following packages:
@@ -58,3 +59,7 @@ Binaries for NOIR (musl) -> https://github.com/kiss-community/repo-bin
 $ export KISS_PATH=/path/to/main/bin:$KISS_PATH
 
 * The packages can now be installed by a simple [kiss b $PKG && kiss i $PKG] command.
+
+5. MIRRORS
+________________________________________________________________________________
+GITLAB: https://gitlab.com/noirlinux/main
