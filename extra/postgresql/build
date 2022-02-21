@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --mandir=/usr/share/man \
+    --disable-ldap \
+    --with-libedit-preferred \
+    --with-openssl \
+    --disable-rpath \
+    --without-llvm \
+    --without-perl \
+    --without-python \
+    --without-icu \
+    --without-tcl \
+    --without-readline
+
+make world
+make DESTDIR="$1" install
