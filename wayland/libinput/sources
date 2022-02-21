@@ -1,4 +1,4 @@
-https://github.com/wayland-project/libinput/archive/1.19.3.tar.gz
+https://github.com/wayland-project/libinput/archive/1.20.0.tar.gz
 https://bitmath.org/code/mtdev/mtdev-1.1.6.tar.bz2 mtdev
 https://freedesktop.org/software/libevdev/libevdev-1.12.0.tar.xz evdev
 patches/evdev-wrap.patch
