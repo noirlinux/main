@@ -5,6 +5,8 @@
     exit 1
 }
 
+patch -p1 < fix-pgo.patch
+
 case $("$CC" --version) in
     *clang*)
         # Clang requires this for PGO.
