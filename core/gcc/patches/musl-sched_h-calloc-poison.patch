@@ -1,0 +1,26 @@
+diff --git a/gcc/libcc1/libcc1plugin.cc b/gcc/libcc1/libcc1plugin.cc
+index 12ab5a5..a2762e7 100644
+--- a/gcc/libcc1/libcc1plugin.cc
++++ b/gcc/libcc1/libcc1plugin.cc
+@@ -31,6 +31,8 @@
+ #undef PACKAGE_TARNAME
+ #undef PACKAGE_VERSION
+ 
++#include <pthread.h>
++
+ #include "gcc-plugin.h"
+ #include "system.h"
+ #include "coretypes.h"
+diff --git a/gcc/libcc1/libcp1plugin.cc b/gcc/libcc1/libcp1plugin.cc
+index 83dab7f..d84fa64 100644
+--- a/gcc/libcc1/libcp1plugin.cc
++++ b/gcc/libcc1/libcp1plugin.cc
+@@ -32,6 +32,8 @@
+ #undef PACKAGE_TARNAME
+ #undef PACKAGE_VERSION
+ 
++#include <pthread.h>
++
+ #include "gcc-plugin.h"
+ #include "system.h"
+ #include "coretypes.h"
