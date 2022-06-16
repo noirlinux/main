@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+make DESTDIR="$1" FIRMWAREDIR=/usr/lib/firmware install
