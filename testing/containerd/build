@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export GO111MODULE=auto
+export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+
+make VERSION="v$2"
+make DESTDIR="$1/usr" install
+
+mkdir -p "$1/etc/sv/containerd"
+
+cp run "$1/etc/sv/containerd/"
+ln -sf /run/runit/supervise.containerd "$1/etc/sv/containerd/supervise"

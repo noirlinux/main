@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# Add system group for docker
+grep -q ^docker: /etc/group || addgroup -S docker
+
+cat <<EOF
+IMPORTANT
+
+    You need to add yourself to the docker group in order to run commands
+    without root priviliges.
+
+EOF
