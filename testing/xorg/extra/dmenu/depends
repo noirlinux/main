@@ -1,0 +1,5 @@
+fontconfig
+libX11
+libXft
+libXinerama
+xorg-server
