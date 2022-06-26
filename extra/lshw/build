@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+for patch in *.patch; do
+    patch -p1 < "$patch"
+done
+
+make RPM_OPT_FLAGS=-DNONLS
+
+make DESTDIR="$1" install
