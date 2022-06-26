@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+
+patch -p1 < rootless_modesetting.patch
+patch -p1 < fix-xorg-21.1.diff
+
+export LDFLAGS="$LDFLAGS -Wl,-z,lazy"
+export CFLAGS="$CFLAGS -fcommon"
+
+./configure \
+    --prefix=/usr
+
+make
+make install
