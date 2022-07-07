@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+
+# Swap to shell script instead of perl script
+# for conversion of rules files. See files/xml2lst.
+sed 's/xml2lst\.pl/xml2lst/' rules/meson.build > _
+mv -f _ rules/meson.build
+
+# Remove po/ dir.
+sed "/subdir('po')/d" meson.build > _
+mv -f _ meson.build
+
+meson setup \
+    -Dprefix=/usr \
+    -Dcompat-rules=true \
+    -Dxorg-rules-symlinks=true \
+    -Dxkb-base="/usr/share/X11/xkb" \
+    output
+
+ninja -C output
+ninja -C output install
