@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-${CC:-cc} -o xrectsel xrectsel.c strtonum.c -lX11
-install -Dt "$1/usr/bin" xrectsel
