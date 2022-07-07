@@ -43,7 +43,7 @@ meson \
     --localstatedir=/var \
     --buildtype=release \
     -Dglx-read-only-text=true \
-    -Dplatforms=x11,wayland
+    -Dplatforms=x11,wayland \
     -Dglx=disabled \
     -Degl=enabled \
     -Dvalgrind=false \
