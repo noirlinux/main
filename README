@@ -35,7 +35,7 @@ your pleasure;
 
 - We also strive for stability in as much as we love functional minimalism.
 
-3. BINARIES
+2. BINARIES
 
 ---
 
@@ -56,7 +56,3 @@ Binaries for NOIR (musl) -> https://github.com/kiss-community/repo-bin
 $ export KISS_PATH=/path/to/main/bin:$KISS_PATH
 
 - The packages can now be installed by a simple [kiss b $PKG && kiss i $PKG] command.
-
-5. MIRRORS
-
----
