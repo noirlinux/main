@@ -1,0 +1,8 @@
+
+# By default, gif and tiff are commented. You can enable support for
+freetype-harfbuzz
+libX11
+libXext
+libjpeg-turbo
+libpng
+libxcb
