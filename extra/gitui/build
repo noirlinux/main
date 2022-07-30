@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-install -Dm755 gitui $1/usr/bin/gitui
+install -Dm755 gitui "$1/usr/bin/gitui"
