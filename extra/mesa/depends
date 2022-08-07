@@ -1,8 +1,5 @@
-bison make
 expat
-flex  make
-libdrm
-libelf
+flex         make
 libX11
 libXdamage
 libXext
@@ -13,13 +10,8 @@ libdrm
 libelf
 libxcb
 libxshmfence
-linux-headers make
 llvm
-m4 make
-meson make
-pkgconf make
-python make
-wayland
-wayland-protocols make
+meson        make
+python       make
 xorgproto
 zlib
