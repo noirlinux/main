@@ -1,2 +1,1 @@
 https://ffmpeg.org/releases/ffmpeg-5.1.tar.xz
-patches/add-av_stream_get_first_dts-for-chromium.patch

@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < add-av_stream_get_first_dts-for-chromium.patch
-
 ./configure \
     --cc="$CC" \
     --cxx="$CXX" \
@@ -13,7 +11,6 @@ patch -p1 < add-av_stream_get_first_dts-for-chromium.patch
     --disable-libxcb-shm \
     --disable-libxcb-xfixes \
     --disable-libxcb-shape \
-    --disable-xlib \
     --enable-gpl \
     --enable-libass \
     --enable-libdrm \
