@@ -1,2 +1,1 @@
-git+https://gitlab.freedesktop.org/xorg/driver/xf86-video-ati
-patches/rootless_modesetting.patch
+https://x.org/releases/individual/driver/xf86-video-ati-19.1.0.tar.gz

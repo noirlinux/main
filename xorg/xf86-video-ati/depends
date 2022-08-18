@@ -1,9 +1,6 @@
-autoconf make
+eudev
 expat
 libdrm
 libpciaccess
-linux-headers make
 mesa
-pkgconf       make
-xorg-util-macros
 xorgproto
