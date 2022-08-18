@@ -1,5 +1,5 @@
-https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.30.tar.xz
-https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas/-/archive/40.0/gsettings-desktop-schemas-40.0.tar.gz schemas
-https://github.com/anholt/libepoxy/releases/download/1.5.8/libepoxy-1.5.8.tar.xz libepoxy
+https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.34.tar.xz
+https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas/-/archive/42.0/gsettings-desktop-schemas-42.0.tar.gz schemas
+https://github.com/anholt/libepoxy/archive/refs/tags/1.5.10.tar.gz libepoxy
 patches/no-fribidi.patch
 patches/fix-firefox.patch
