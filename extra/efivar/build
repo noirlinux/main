@@ -37,7 +37,7 @@ mv -f _ src/Makefile
   install -Dm644 libefivar.a "$1/usr/lib/libefivar.a"
 
   # Install the headers
-  find include -type f | while read file; do
-    install -Dm644 "$file" "$1/usr/include/$file"
+  find include -type f | while read -r file; do
+    install -Dm644 "$file" "$1/usr/$file"
   done
 )
