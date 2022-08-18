@@ -1,5 +1,17 @@
 #!/bin/sh -e
 
+export LDFLAGS="$LDFLAGS -static"
+
+mk() {
+    make \
+        TOPDIR=.. \
+        libdir=/usr/lib/ \
+        bindir=/usr/bin/ \
+        mandir=/usr/share/man/ \
+        includedir=/usr/include/ \
+        "$@"
+}
+
 patch -p1 < no-add-needed.patch
 
 # Disable test program 'thread-test' as it causes build failures when using
@@ -9,5 +21,23 @@ patch -p1 < no-add-needed.patch
 sed 's/thread-test//' src/Makefile > _
 mv -f _ src/Makefile
 
-make COMPILER="$CC"
-make libdir=/usr/lib/ install
+(
+  cd src
+
+  # Build the targets
+  mk libefiboot.a libefivar.a efiboot.pc efivar.pc
+  patch -p2 < ../musl-compat.patch
+  mk efivar-static
+
+  # Install the targets
+  install -Dm755 efivar-static "$1/usr/bin/efivar"
+  install -Dm644 efiboot.pc "$1/usr/lib/pkgconfig/efiboot.pc"
+  install -Dm644 efivar.pc "$1/usr/lib/pkgconfig/efivar.pc"
+  install -Dm644 libefiboot.a "$1/usr/lib/libefiboot.a"
+  install -Dm644 libefivar.a "$1/usr/lib/libefivar.a"
+
+  # Install the headers
+  find include -type f | while read file; do
+    install -Dm644 "$file" "$1/usr/include/$file"
+  done
+)

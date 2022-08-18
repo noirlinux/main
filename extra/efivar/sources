@@ -1,2 +1,3 @@
-https://github.com/rhboot/efivar/archive/e830c0fc0dc658bf3d5b6184682317f2b8a3cf92.tar.gz
+https://github.com/rhboot/efivar/releases/download/38/efivar-38.tar.bz2
+patches/musl-compat.patch
 patches/no-add-needed.patch

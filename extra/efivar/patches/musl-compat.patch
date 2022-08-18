@@ -1,0 +1,20 @@
+--- a/src/guid-symbols.c	Thu Apr 28 01:31:10 2022
++++ b/src/guid-symbols.c	Thu Apr 28 01:30:44 2022
+@@ -207,7 +207,7 @@
+ 
+ const struct efivar_guidname
+ 	__attribute__((__visibility__ ("default")))
+-	efi_well_known_guids_[42]= {
++	efi_well_known_guids[42]= {
+ 		{.guid={.a=cpu_to_le32(0),
+ 		        .b=cpu_to_le16(0),
+ 		        .c=cpu_to_le16(0),
+@@ -589,7 +589,7 @@
+ };
+ const struct efivar_guidname
+ 	__attribute__((__visibility__ ("default")))
+-	efi_well_known_names_[42]= {
++	efi_well_known_names[42]= {
+ 		{.guid={.a=cpu_to_le32(0x3b053091),
+ 		        .b=cpu_to_le16(0x6c9f),
+ 		        .c=cpu_to_le16(0x4cc),
