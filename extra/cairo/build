@@ -12,12 +12,13 @@ mv -f _ Makefile.in
 
 sh ./configure \
     --prefix=/usr \
-    --disable-static \
     --enable-tee \
-    --disable-xlib-xcb \
-    --disable-xcb \
-    --disable-xlib-xrender \
-    --disable-xlib \
+    --enable-gl \
+    --enable-egl \
+    --enable-xlib-xcb \
+    --enable-xcb \
+    --enable-xlib-xrender \
+    --enable-xlib \
     --disable-trace \
     --disable-valgrind \
     --disable-gtk-doc-html
