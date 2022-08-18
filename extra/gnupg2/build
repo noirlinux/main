@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+# Fix build fail with GCC 10.
+export CFLAGS="$CFLAGS -fcommon"
+export LDFLAGS="$LDFLAGS -static"
+export PKG_CONFIG=pkgconf\ --static
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libexecdir=/usr/lib
+
+make
+make install

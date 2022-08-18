@@ -1,0 +1,6 @@
+libassuan make
+libgcrypt make
+libgpg-error make
+libksba make
+npth make
+pinentry
