@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+wayland_backend="false"
+kiss l wayland >/dev/null 2>&1 && wayland_backend="true"
+
+meson \
+    -Dgtk_doc=false \
+    -Dwayland-backend=${wayland_backend} \
+    -Dwin32-backend=false \
+    -Dintrospection=disabled \
+    -Dmedia-gstreamer=disabled \
+    -Dprint-cups=disabled \
+    -Ddemos=false \
+    -Df16c=disabled \
+    -Dbuild-tests=false \
+    -Dbuild-examples=false \
+    -Dvulkan=disabled \
+    . output
+
+ninja -C output
+ninja -C output install
