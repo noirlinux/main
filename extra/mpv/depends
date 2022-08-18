@@ -2,10 +2,8 @@ alsa-lib
 ffmpeg
 freetype-harfbuzz
 libass
-libxkbcommon
-linux-headers make
+libXScrnSaver
+libXinerama
+libXrandr
 mesa
-pkgconf make
-python  make
-wayland
-wayland-protocols make
+python            make
