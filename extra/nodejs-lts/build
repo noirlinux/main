@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
-cd local
+export CFLAGS="${CFLAGS} -O2 -fPIC -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+export CXXFLAGS="${CXXFLAGS} -O2 -fPIC -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
 
-cp -r ./* "$1"
+python3 configure.py --prefix=/usr
+
+make BUILDTYPE=Release -j$(nproc)
+make install
