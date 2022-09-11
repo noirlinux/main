@@ -19,7 +19,7 @@
 
 meson \
     --prefix=/usr \
-    -Dvalgrind=false \
+    -Dvalgrind=disabled \
     . build
 
 ninja -C build
