@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 cgroupfs-mount "$1/usr/bin/cgroup-mount"
+install -Dm755 cgroupfs-umount "$1/usr/bin/cgroup-umount"
