@@ -1,5 +1,5 @@
 bash        make
-btrfs-progs
+btrfs-progs make
 cmake       make
 containerd
 iptables
