@@ -5,7 +5,7 @@ meson \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
     -Dwith_wayland=yes \
-    -Dwith_x11=no \
+    -Dwith_x11=yes \
     -Dwith_glx=no \
     . output
 
