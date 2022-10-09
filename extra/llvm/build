@@ -2,11 +2,6 @@
 
 mv Modules/* cmake/modules/
 
-# Remove ncurses dependency.
-sed 's/\(LLVM_ENABLE_TERMINFO\) 1/\1 2/' \
-    cmake/config-ix.cmake > _
-mv -f _ cmake/config-ix.cmake
-
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
@@ -25,3 +20,27 @@ cmake -B build \
 
 cmake --build   build
 cmake --install build
+
+# Use new llvm-config to generate a pkg-config file.
+PATH="$1/usr/bin:$PATH"
+mkdir -p "$1/usr/lib/pkgconfig"
+
+# shellcheck disable=2016
+sed -e "s|$1||" -e 's|/usr/include|\${includedir}|' \
+    > "$1/usr/lib/pkgconfig/llvm.pc" <<EOF
+prefix=/usr
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+has_rtti=$(llvm-config --has-rtti)
+
+Name: LLVM
+Description: LLVM compiler infrastructure
+URL: https://llvm.org
+Version: $(llvm-config --version)
+Requires:
+Requires.private: zlib
+Libs: -L\${libdir} $(llvm-config --libs)
+Libs.private: -lstdc++ $(llvm-config --libs --link-static)
+Cflags: $(llvm-config --cflags)
+EOF
