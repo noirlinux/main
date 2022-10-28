@@ -1,2 +1,5 @@
+automake make
+autoconf make
+libtool make
 imlib2
 libXext

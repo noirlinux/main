@@ -1,1 +1,2 @@
-http://kent.dl.sourceforge.net/project/slackbuildsdirectlinks/giblib/giblib-1.2.4.tar.gz
+https://downloads.sourceforge.net/project/slackbuildsdirectlinks/giblib/giblib-1.2.4.tar.gz
+patches/fix-configure_ac-imlib2.patch

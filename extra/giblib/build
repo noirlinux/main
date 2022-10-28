@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+patch -p1 < fix-configure_ac-imlib2.patch
+
+autoreconf -fvi
+
 ./configure \
     --prefix=/usr
 
