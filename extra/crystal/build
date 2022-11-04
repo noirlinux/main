@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+ patch -p1 < fix-crystal-sh.patch
+
+export PATH="core/bin:$PATH"
+export CRYSTAL_CONFIG_VERSION="1.6.1"
+export EXPORT_CC="CC=cc"
+
+make crystal \
+    CRYSTAL_CONFIG_PATH="/usr/lib/crystal" \
+    CRYSTAL_CACHE_DIR=".tmp/crystal" \
+    LLVM_CONFIG="/usr/bin/llvm-config" \
+    release=1 \
+    FLAGS="--no-debug"
+
+install -Dm755 .build/crystal "$1/usr/bin/crystal"
+
+mkdir -p "$1/usr/lib"
+
+cp -a src "$1/usr/lib/crystal"
