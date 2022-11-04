@@ -1,0 +1,55 @@
+#!/bin/sh -e
+
+echo "Building nim source files"
+(
+    cd csources
+    
+    chmod +x build.sh
+    # Build nim source files
+    ./build.sh
+)
+
+echo "Building a release version of the "koch" maintenance program"
+bin/nim compile -d:release koch
+
+echo "Build a release version of the nim compiler"
+./koch boot -d:release
+
+echo "Building nimsuggest, nimgrep, and nimpretty"
+./koch tools
+
+# Build nimrtl.nim
+(
+    cd lib
+    ../bin/nim c --app:lib -d:createNimRtl -d:release nimrtl.nim
+)
+
+# Installs bins / dirs
+for i in nim nimble nimgrep nimpretty nimsuggest; do
+    install -Dm755 bin/$i "$1/usr/bin/$i"
+done
+
+# Copy lib,config and header folders to respective dirs
+mkdir -p "$1/usr/lib/nim"
+mkdir -p "$1/usr/include"
+mkdir -p "$1/etc/nim"
+
+
+cp -r lib/* "$1/usr/lib/nim"
+cp -r config "$1/etc/nim"
+
+# Workaround Nim's nonstandard header file placement
+# (https://bugs.archlinux.org/task/50252)
+ln -s lib/nim/*.h "$1/usr/include/"
+
+# Fix unusual placement of shared object files
+ln -s "$1/usr/lib/nim/libnimrtl.so" "$1/usr/lib/libnimrtl.so"
+
+# Nimble looks for nimscriptapi.nim in /usr/bin/nimblepkg/, of all places
+mkdir -p "$1/usr/share/nimble"
+
+# Copy everything to the right folder
+cp -r dist/nimble/src/nimblepkg "$1/usr/share/nimble"
+
+# Link the two folders
+ln -s "$1/usr/share/nimble" "$1/usr/bin/nimblepkg"
