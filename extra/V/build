@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+export VFLAGS='-cc gcc'
+
+CFLAGS="" LDFLAGS="" make prod=1
+
+mkdir -p "$1/usr/lib/vlang"
+mkdir -p "$1/usr/share/vlang"
+mkdir -p "$1/usr/bin"
+
+for i in cmd examples thirdparty vlib; do
+    cp -r $i "$1/usr/lib/vlang/"
+done
+
+cp v.mod "$1/usr/lib/vlang/"
+
+install -Dm755 v "$1/usr/lib/vlang/v"
+ln -s /usr/lib/vlang/v "$1/usr/bin/v"
