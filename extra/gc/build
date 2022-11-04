@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+#./autogen.sh
+./configure --enable-static --disable-shared --enable-cplusplus --disable-docs
+
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+make -j"$(nproc)"
+make install
