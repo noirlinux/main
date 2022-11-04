@@ -1,0 +1,29 @@
+#!/bin/sh -e
+
+/etc/ssl/update-certdata.sh
+
+yes | certmgr -ssl -m https://go.microsoft.com
+yes | certmgr -ssl -m https://nugetgallery.blob.core.windows.net
+yes | certmgr -ssl -m https://nuget.org
+
+cert-sync /etc/ssl/certs/ca-certificates.crt
+
+#!/bin/sh -e
+
+printf "+-----------------------------------------------------+
+|                    ATTENTION                        |
++-----------------------------------------------------+
+| This package adds three certifaces to your          |
+| /etc/ssl/certs/ca-certificates.crt                  |
+| and modifies your /etc/ssl/cert.pem file            |
+| the added domains are;                              |
+|                                                     |
+|  https://go.microsoft.com                           |
+|  https://nugetgallery.blob.core.windows.net         |
+|  https://nuget.org                                  |
+|                                                     |
+| You can revert this by deleting the changed files   |
+| and running /etc/ssl/update-certdata.sh             |
++-----------------------------------------------------+\n"
+
+
