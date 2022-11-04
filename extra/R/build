@@ -1,0 +1,65 @@
+#!/bin/sh -e
+
+for patch in *.patch; do
+    patch -Np1 -i "$patch"
+done
+
+# CXXFLAGS is propagated to /etc/R/Makeconf that is read when building
+# additional R modules. -D__MUSL__ is needed for some modules like Rcpp.
+# htps://github.com/RcppCore/Rcpp/issues/448
+export CXXFLAGS="$CXXFLAGS"
+export CFLAGS="$CFLAGS"
+
+rm -rf po
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc/R \
+    --localstatedir=/var \
+    --libdir=/usr/lib \
+    rhome=/usr  \
+    rdocdir=/usr/share/doc/R \
+    rincludedir=/usr/include/R \
+    rsharedir=/usr/share/R \
+    --with-pcre1  \
+    --disable-nls \
+    --enable-R-shlib \
+    --disable-java \
+    --without-recommended-packages \
+    --without-blas \
+    --without-cairo \
+    --without-ICU \
+    --without-docs \
+    --without-jpeglib \
+    --without-lapack \
+    --without-libpng \
+    --without-libtiff \
+    --without-tcltk \
+    --without-x \
+    --without-pcre2 \
+    --without-readline \
+    gcc=gfortran \
+    LIBnn=Lib
+
+# The R build sytem assumes that DESTDIR is only set at install
+# This behaviour is unexpected, the result of this is that it 
+# the DESTDIR to it's initial mkdir calls
+# https://github.com/kisslinux/kiss/issues/258
+# https://github.com/r-lib/rlang/issues/1246
+make DESTDIR=""
+make DESTDIR="$1" install
+
+# Install libRmath.so.
+make -C src/nmath/standalone
+make DESTDIR="$1" -C src/nmath/standalone install
+
+# Fixup R wrapper script (taken from Arch).
+ln -sf "/usr/bin/R" "$1/usr/lib/R/bin/R"
+
+# Remove some useless files (COPYING is duplicated, it will be
+# in -doc, don't worry).
+rm "$1/usr/lib/R/COPYING" "$1/usr/lib/R/SVN-REVISION"
+
+rm -rf "$1/usr/lib/R/library/translations"
+rm -rf "$1/usr/share/R/licenses"
+rm -rf "$1/usr/share/doc"
