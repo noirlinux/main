@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+export AS="cc -c"
+export ASPP="cc -c"
+
+./configure \
+    --prefix /usr \
+    --bindir /usr/bin \
+    --libdir /usr/lib/ocaml \
+    --mandir /usr/share/man \
+    --disable-force-safe-string
+
+make world.opt
+make DESTDIR="$1" install
+
+install -Dm644 LICENSE "$1/usr/share/licenses/ocaml/LICENSE"
+
+find "$1/usr/lib/ocaml" \
+	\( -name '*.cmt' -o -name '*.cmti' -o -name '*.ml' \) \
+	-a -delete
+
+rm -rf "$1/usr/lib/ocaml/compiler-libs"
