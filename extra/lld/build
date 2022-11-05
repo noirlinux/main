@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+export CC=clang CXX=clang++
+
+cmake -B build -G Ninja -Wno-dev \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+cmake --build build
+cmake --install build
