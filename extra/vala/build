@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --disable-valadoc
+
+make
+make DESTDIR="$1" install
+
+# Remove unnecessary stuff
+find "$1" -name "*.la" -exec rm -rf {} +
+
+# Dir is not needed
+rm -rf "$1/usr/share/devhelp"
