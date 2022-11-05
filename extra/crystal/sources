@@ -1,3 +1,3 @@
-https://github.com/crystal-lang/crystal/archive/1.6.1.tar.gz
+https://github.com/crystal-lang/crystal/archive/1.6.2.tar.gz
 https://dev.alpinelinux.org/archive/crystal/crystal-1.5.1-x86_64-alpine-linux-musl.tar.gz core
 patches/fix-crystal-sh.patch
