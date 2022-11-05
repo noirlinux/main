@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+make MYCFLAGS="$CFLAGS -fPIC" \
+     MYLDFLAGS="$LDFLAGS" \
+     posix
+     
+sed "s/install -p/install/" Makefile > _
+mv -f _ Makefile
+
+make INSTALL_TOP="$1/usr" \
+     INSTALL_MAN="$1/usr/share/man/man1" \
+     INSTALL_DATA="cp -P" \
+     install
+
+maj_min=${2%.*}
+maj_min_patch=$2
+
+mkdir -p "$1/usr/lib/pkgconfig"
+
+sed \
+    -e "s|%VER%|$maj_min|" \
+    -e "s|%REL%|$maj_min_patch|" \
+    lua.pc > "$1/usr/lib/pkgconfig/lua.pc"
