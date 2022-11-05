@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+rm -Rf src/foreign/libffi
+
+cd src
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --enable-shared \
+    --disable-docs
+
+make
+make install DESTDIR="$1"
+
+rm -Rf "$1/usr/share/applications"
+rm -Rf "$1/usr/lib/racket/gracket"
