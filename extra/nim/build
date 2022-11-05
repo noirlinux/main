@@ -9,7 +9,7 @@ echo "Building nim source files"
     ./build.sh
 )
 
-echo "Building a release version of the "koch" maintenance program"
+echo "Building a release version of the 'koch' maintenance program"
 bin/nim compile -d:release koch
 
 echo "Build a release version of the nim compiler"
