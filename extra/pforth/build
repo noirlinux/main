@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cd platforms/unix
+make all EXTRA_CCOPTS='-DPF_DEFAULT_DICTIONARY=\"/usr/share/pforth/pforth.dic\"'
+
+mkdir -p "$1/usr/bin"
+mkdir -p "$1/usr/share/pforth"
+
+mv ./pforth "$1/usr/bin"
+mv ./pforth_standalone "$1/usr/bin"
+mv ./pforth.dic "$1/usr/share/pforth"
