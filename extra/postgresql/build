@@ -16,3 +16,4 @@
 
 make world
 make DESTDIR="$1" install
+make -C contrib DESTDIR="$1" install
