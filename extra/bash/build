@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -DSYS_BASHRC='\"/etc/bash/bashrc\"'"
+
+./configure \
+    --prefix=/usr \
+    --without-bash-malloc \
+    --without-installed-readline \
+    --disable-nls
+
+make
+make DESTDIR="$1" install
+
+ln -s bash "$1/usr/bin/sh"
