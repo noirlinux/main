@@ -38,7 +38,7 @@ mv -f _ Makefile.in
 )
 
 # Point gtk+3 to the vendored libepoxy.
-export PKG_CONFIG_PATH=$PWD/libepoxy/usr/lib/pkgconfig
+export PKG_CONFIG_PATH="$PWD/libepoxy/usr/lib/pkgconfig"
 export CFLAGS="$CFLAGS -L$PWD/libepoxy/usr/lib"
 export CFLAGS="$CFLAGS -I$PWD/libepoxy/usr/include"
 
