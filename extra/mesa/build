@@ -24,6 +24,22 @@
 }
 export PYTHONPATH
 
+{
+    cd markupsafe
+
+    python3 setup.py build
+    python3 setup.py install \
+        --prefix=/usr \
+        --root="$PWD/dist"
+    
+    cd dist/usr/lib/python*/site-packages
+    
+    PYTHONPATH=$PWD:$(python -c "import sys; print(':'.join(sys.path))")
+
+    cd -; cd ..
+}
+
+export PYTHONPATH
 # Fix issues with musl and firefox.
 # https://bugs.freedesktop.org/show_bug.cgi?id=35268
 # https://github.com/mesa3d/mesa/commit/9f37c9903b87f86a533bfaffa72f0ecb285b02b2
