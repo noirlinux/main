@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-utf8 \
+    --enable-unicode-properties \
+    --enable-pcre2-8 \
+    --enable-pcre2-16 \
+    --enable-pcre2-32 \
+    --with-match-limit-depth=8192
+
+make
+make DESTDIR="$1" install
