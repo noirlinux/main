@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+for p in *.patch; do
+    patch -p1 < "$p"
+done
+
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --enable-libipq \
+    --with-xtlibdir=/usr/lib/xtables \
+    --disable-nftables
+
+make
+make DESTDIR="$1" install
