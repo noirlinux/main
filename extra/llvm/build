@@ -2,6 +2,9 @@
 
 mv Modules/* cmake/modules/
 
+# Create a symbolic link to the expected folder
+mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
+
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
