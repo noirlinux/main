@@ -1,4 +1,4 @@
-https://git.busybox.net/busybox/snapshot/busybox-1_34_1.tar.bz2
+https://git.busybox.net/busybox/snapshot/busybox-1_36_1.tar.bz2
 patches/adduser-no-setgid.patch patch
 patches/fsck-resolve-uuid.patch patch
 patches/modprobe-kernel-version.patch patch
