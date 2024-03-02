@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --localstatedir=/var \
+    --with-priv-mode=none \
+    --disable-man
+
+make
+make DESTDIR="$1" install
