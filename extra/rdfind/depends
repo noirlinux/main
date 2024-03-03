@@ -1,2 +1,3 @@
 autoconf make
 libtool make
+nettle
