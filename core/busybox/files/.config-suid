@@ -332,7 +332,7 @@ CONFIG_GZIP_FAST=0
 # CONFIG_FEATURE_TR_EQUIV is not set
 # CONFIG_TRUE is not set
 # CONFIG_TRUNCATE is not set
-CONFIG_TSORT=y
+# CONFIG_TSORT is not set
 # CONFIG_TTY is not set
 # CONFIG_UNAME is not set
 CONFIG_UNAME_OSNAME=""
