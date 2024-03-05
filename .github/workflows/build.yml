@@ -44,12 +44,11 @@ jobs:
       - name: Clone NOIR repos to chroot
         run: |
           sudo mkdir -p /chroot/root/
-          sudo mkdir -p /chroot
+          sudo mkdir -p /chroot/root/build
           sudo git clone https://github.com/noirlinux/main /chroot/root/main
 
       - name: Enter Chroot and Run Script
         run: |
-          sudo mkdir -p /chroot/root/build
           sudo chroot /chroot /bin/sh -c "\
             export LOGNAME=$(whoami); \
             export CFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
