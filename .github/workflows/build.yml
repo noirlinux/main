@@ -61,7 +61,7 @@ jobs:
             export KISS_PATH=/root/main/core:/root/main/extra; \
             cd /root/main/core && \
             rm -rf gcc && \
-            kiss build *"
+            KISS_PROMPT=0 kiss build *"
 
       - name: Check Exit Status
         id: check_status
