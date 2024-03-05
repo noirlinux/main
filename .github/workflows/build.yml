@@ -3,10 +3,10 @@ name: NOIR CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   run-chroot-script:
@@ -33,6 +33,7 @@ jobs:
 
       - name: Extract the tarball
         run: |
+          sudo mkdir -p /chroot/
           sudo tar xzf chroot.tar.gz -C /chroot/
           echo "NOIR chroot extracted to /chroot/"
 
@@ -43,7 +44,7 @@ jobs:
 
       - name: Enter Chroot and Run Script
         run: |
-          sudo chroot /chroot /bin/bash -c "export KISS_PATH=/root/main/core:/root/main/extra; cd /var/db/kiss/installed && kiss build *"
+          sudo chroot /chroot /bin/sh -c "export KISS_PATH=/root/main/core:/root/main/extra; cd /var/db/kiss/installed && kiss build *"
 
       - name: Check Exit Status
         id: check_status
