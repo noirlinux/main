@@ -54,7 +54,7 @@ jobs:
             export CXXFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
             export MAKEFLAGS='-j$(nproc)'; \
             export KISS_PATH=/root/main/core:/root/main/extra; \
-            cd /root/main && \
+            cd /root/main/core && \
             rm -rf gcc && \
             kiss build *"
 
