@@ -37,6 +37,10 @@ jobs:
           sudo tar xvf chroot.tar.xz -C /chroot/
           echo "NOIR chroot extracted to /chroot/"
 
+      - name: Copy host resolv.conf to chroot
+        run: |
+          sudo cp /etc/resolv.conf /chroot/etc/resolv.conf
+
       - name: Clone NOIR repos to chroot
         run: |
           sudo mkdir -p /chroot/root/
@@ -44,7 +48,13 @@ jobs:
 
       - name: Enter Chroot and Run Script
         run: |
-          sudo /chroot/bin/kiss-chroot /chroot /bin/sh -c "export KISS_PATH=/root/main/core:/root/main/extra; cd /var/db/kiss/installed && kiss build *"
+          sudo chroot /chroot /bin/sh -c "\
+            export LOGNAME=$(whoami); \
+            export CFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
+            export CXXFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
+            export MAKEFLAGS='-j$(nproc)'; \
+            export KISS_PATH=/root/main/core:/root/main/extra; \
+            cd /var/db/kiss/installed && kiss build *"
 
       - name: Check Exit Status
         id: check_status
