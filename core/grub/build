@@ -21,6 +21,11 @@ CFLAGS=$(printf %s "$CXXFLAGS" | sed 's/-march=[^ ]*//g')
 build_grub() (
     cd "grub-${1##*=}"
 
+    patch -p1 < ../no-asorti.patch
+
+    # This file is missing from the release tarball.
+    touch grub-core/extra_deps.lst
+
     ./configure \
         --prefix=/usr \
         --sbindir=/usr/bin \

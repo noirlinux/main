@@ -1,3 +1,4 @@
 https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz grub-pc
 https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz grub-efi
 files/grub.default
+patches/no-asorti.patch
