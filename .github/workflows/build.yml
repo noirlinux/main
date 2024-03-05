@@ -34,7 +34,7 @@ jobs:
       - name: Extract the tarball
         run: |
           sudo mkdir -p /chroot/
-          sudo tar xzf chroot.tar.gz -C /chroot/
+          sudo tar xvzf chroot.tar.gz -C /chroot/
           echo "NOIR chroot extracted to /chroot/"
 
       - name: Clone NOIR repos to chroot
