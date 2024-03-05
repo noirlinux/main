@@ -1,43 +1,7 @@
 #!/bin/sh -e
 
-export LDFLAGS="$LDFLAGS -static"
+# Remove mandoc build dependency
+mv docs/efisecdb.1.mdoc docs/efisecdb.1
 
-mk() {
-    make \
-        TOPDIR=.. \
-        libdir=/usr/lib/ \
-        bindir=/usr/bin/ \
-        mandir=/usr/share/man/ \
-        includedir=/usr/include/ \
-        "$@"
-}
-
-patch -p1 < no-add-needed.patch
-
-# Disable test program 'thread-test' as it causes build failures when using
-# parallel make (due to missing dependency on libefivar.so). Other workarounds
-# include patching the Makefile or forcing -j1 (what we used to do).
-# See: https://github.com/rhboot/efivar/pull/169
-sed 's/thread-test//' src/Makefile > _
-mv -f _ src/Makefile
-
-(
-  cd src
-
-  # Build the targets
-  mk libefiboot.a libefivar.a efiboot.pc efivar.pc
-  patch -p2 < ../musl-compat.patch
-  mk efivar-static
-
-  # Install the targets
-  install -Dm755 efivar-static "$1/usr/bin/efivar"
-  install -Dm644 efiboot.pc "$1/usr/lib/pkgconfig/efiboot.pc"
-  install -Dm644 efivar.pc "$1/usr/lib/pkgconfig/efivar.pc"
-  install -Dm644 libefiboot.a "$1/usr/lib/libefiboot.a"
-  install -Dm644 libefivar.a "$1/usr/lib/libefivar.a"
-
-  # Install the headers
-  find include -type f | while read -r file; do
-    install -Dm644 "$file" "$1/usr/$file"
-  done
-)
+make COMPILER="${CC}"
+make DESTDIR="$1" libdir=/usr/lib/ install
