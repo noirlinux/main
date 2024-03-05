@@ -44,7 +44,7 @@ jobs:
 
       - name: Enter Chroot and Run Script
         run: |
-          sudo chroot /chroot /bin/sh -c "export KISS_PATH=/root/main/core:/root/main/extra; cd /var/db/kiss/installed && kiss build *"
+          sudo /chroot/bin/kiss-chroot /chroot /bin/sh -c "export KISS_PATH=/root/main/core:/root/main/extra; cd /var/db/kiss/installed && kiss build *"
 
       - name: Check Exit Status
         id: check_status
