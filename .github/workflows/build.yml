@@ -44,7 +44,6 @@ jobs:
       - name: Clone NOIR repos to chroot
         run: |
           sudo mkdir -p /chroot/root/
-          sudo mkdir -p /chroot/root/build
           sudo git clone https://github.com/noirlinux/main /chroot/root/main
 
       - name: Enter Chroot and Run Script
@@ -54,7 +53,6 @@ jobs:
             export CFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
             export CXXFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
             export MAKEFLAGS='-j$(nproc)'; \
-            export KISS_ROOT=/root/build; \
             export KISS_PATH=/root/main/core:/root/main/extra; \
             cd /var/db/kiss/installed && \
             kiss build $(ls | grep -v 'gcc')"
