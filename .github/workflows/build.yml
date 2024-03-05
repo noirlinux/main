@@ -46,6 +46,11 @@ jobs:
           sudo mkdir -p /chroot/root/
           sudo git clone https://github.com/noirlinux/main /chroot/root/main
 
+      - name: Create mock /dev/tty
+        run: |
+            sudo mknod -m 666 /chroot/dev/tty c 5 0 || true
+            sudo chown root:tty /chroot/dev/tty || true
+
       - name: Enter Chroot and Run Script
         run: |
           sudo chroot /chroot /bin/sh -c "\
