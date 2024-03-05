@@ -23,18 +23,18 @@ jobs:
       - name: Get the release tarball url
         id: get-tarball-url
         run: |
-          LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/noirlinux/main/releases/latest | jq -r '.tarball_url')
+          LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/noirlinux/main/releases/latest | jq -r '.assets[] | select(.name | endswith(".tar.xz")) | .browser_download_url')
           echo "Latest release URL: $LATEST_RELEASE_URL"
           echo "::set-output name=url::$LATEST_RELEASE_URL"
 
       - name: Download the tarball
         run: |
-          curl -L -o chroot.tar.gz ${{ steps.get-tarball-url.outputs.url }}
+          curl -L -o chroot.tar.xz ${{ steps.get-tarball-url.outputs.url }}
 
       - name: Extract the tarball
         run: |
           sudo mkdir -p /chroot/
-          sudo tar xvzf chroot.tar.gz -C /chroot/
+          sudo tar xvf chroot.tar.xz -C /chroot/
           echo "NOIR chroot extracted to /chroot/"
 
       - name: Clone NOIR repos to chroot
