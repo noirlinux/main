@@ -61,7 +61,7 @@ jobs:
             export MAKEFLAGS='-j$(nproc)'; \
             export KISS_PATH=/root/main/core:/root/main/extra; \
             cd /root/main/core && \
-            rm -rf gcc && \
+            rm -rf gcc flex && \
             KISS_PROMPT=0 /root/kiss build *"
 
       - name: Check Exit Status
