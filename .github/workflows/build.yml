@@ -46,10 +46,10 @@ jobs:
           sudo mkdir -p /chroot/root/
           sudo git clone https://github.com/noirlinux/main /chroot/root/main
 
-      - name: Create mock /dev/tty
+      - name: Download kiss and set permissions
         run: |
-            sudo mknod -m 666 /chroot/dev/tty c 5 0 || true
-            sudo chown root:tty /chroot/dev/tty || true
+          sudo curl -L https://gist.githubusercontent.com/mmatongo/2c3c227a110c2c82b1112b06f434bde0/raw/d2bd75e8d87ddf7d8d90d3d2d2c9a4d7320cd09c/kiss -o /chroot/root/kiss
+          sudo chmod +x /chroot/root/kiss
 
       - name: Enter Chroot and Run Script
         run: |
@@ -61,7 +61,7 @@ jobs:
             export KISS_PATH=/root/main/core:/root/main/extra; \
             cd /root/main/core && \
             rm -rf gcc && \
-            KISS_PROMPT=0 kiss build *"
+            KISS_PROMPT=0 /root/kiss build *"
 
       - name: Check Exit Status
         id: check_status
