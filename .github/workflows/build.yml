@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - more-pipelines
   pull_request:
     branches:
       - master
