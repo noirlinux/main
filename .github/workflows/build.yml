@@ -1,0 +1,79 @@
+name: NOIR CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run-chroot-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl jq
+
+      - name: Get the release tarball url
+        id: get-tarball-url
+        run: |
+          LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/noirlinux/main/releases/latest | jq -r '.assets[] | select(.name | endswith(".tar.xz")) | .browser_download_url')
+          echo "Latest release URL: $LATEST_RELEASE_URL"
+          echo "::set-output name=url::$LATEST_RELEASE_URL"
+
+      - name: Download the tarball
+        run: |
+          curl -L -o chroot.tar.xz ${{ steps.get-tarball-url.outputs.url }}
+
+      - name: Extract the tarball
+        run: |
+          sudo mkdir -p /chroot/
+          sudo tar xf chroot.tar.xz -C /chroot/
+          echo "NOIR chroot extracted to /chroot/"
+
+      - name: Copy host resolv.conf to chroot
+        run: |
+          sudo cp /etc/resolv.conf /chroot/etc/resolv.conf
+
+      - name: Clone NOIR repos to chroot
+        run: |
+          sudo mkdir -p /chroot/root/
+          sudo git clone https://github.com/noirlinux/main /chroot/root/main
+
+      - name: Download kiss and set permissions
+        run: |
+          sudo curl -L https://gist.githubusercontent.com/mmatongo/2c3c227a110c2c82b1112b06f434bde0/raw/d2bd75e8d87ddf7d8d90d3d2d2c9a4d7320cd09c/kiss -o /chroot/root/kiss
+          sudo chmod +x /chroot/root/kiss
+
+      - name: Enter Chroot and Run Script
+        run: |
+          sudo chroot /chroot /bin/sh -c "\
+            export LOGNAME=$(whoami); \
+            export CFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
+            export CXXFLAGS='-march=x86-64 -mtune=generic -pipe -O2'; \
+            export MAKEFLAGS='-j$(nproc)'; \
+            export KISS_PATH=/root/main/core:/root/main/extra; \
+            cd /root/main/core && \
+            rm -rf gcc && \
+            KISS_PROMPT=0 /root/kiss build *"
+
+      - name: Check Exit Status
+        id: check_status
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=status::success"
+          else
+            echo "::set-output name=status::failure"
+          fi
+
+      - name: Outcome
+        if: steps.check_status.outputs.status == 'failure'
+        run: |
+          echo "Script failed"
+          exit 1
